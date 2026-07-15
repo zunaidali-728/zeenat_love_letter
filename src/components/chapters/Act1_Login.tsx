@@ -29,7 +29,7 @@ export default function Act1Login() {
     <ActWrapper className="bg-burgundy z-10">
       <AnimatePresence>
         {!isUnlocked ? (
-          <motion.div 
+          <motion.div
             exit={{ opacity: 0, scale: 0.8, y: 100 }}
             className="flex flex-col items-center justify-center w-full px-6"
           >
@@ -37,7 +37,7 @@ export default function Act1Login() {
             <div className="relative w-full max-w-md md:max-w-lg min-h-[320px] bg-cream shadow-2xl rounded-sm flex flex-col items-center justify-center p-6 md:p-8 border border-white/50">
               {/* Envelope Flap (visual only for now) */}
               <div className="absolute top-0 left-0 w-full h-1/2 bg-cream/90 border-b border-black/5 rounded-t-sm clip-triangle transform origin-top" />
-              
+
               <div className="z-10 w-full flex flex-col items-center mt-12">
                 <h1 className="font-serif text-2xl md:text-4xl text-wine mb-6 text-center px-2">
                   Who is my favorite person?
@@ -49,7 +49,7 @@ export default function Act1Login() {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter her beautiful name..."
+                    placeholder="Enter Your Beautiful Name..."
                     className="w-full bg-transparent border-b-2 border-wine/30 focus:border-wine text-center text-lg md:text-xl p-3 font-serif text-wine placeholder-wine/40 focus:outline-none transition-colors"
                   />
                   {isError && (
@@ -59,7 +59,7 @@ export default function Act1Login() {
                   )}
                   {/* Wax Seal Button */}
                   <div className="flex justify-center mt-8">
-                    <button 
+                    <button
                       type="submit"
                       className="w-16 h-16 bg-rose-800 rounded-full shadow-lg border-2 border-rose-900 flex items-center justify-center text-white/50 hover:bg-rose-700 transition-colors"
                     >
