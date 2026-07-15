@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${inter.variable} ${cormorant.variable} ${greatVibes.variable} antialiased bg-background text-foreground overflow-x-hidden cursor-none`}
+        className={`${inter.variable} ${cormorant.variable} ${greatVibes.variable} antialiased bg-background text-foreground overflow-x-hidden`}
         suppressHydrationWarning
       >
         <ThemeProvider>

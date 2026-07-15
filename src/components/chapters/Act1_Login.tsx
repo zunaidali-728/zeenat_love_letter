@@ -34,12 +34,12 @@ export default function Act1Login() {
             className="flex flex-col items-center justify-center w-full px-6"
           >
             {/* The Envelope UI */}
-            <div className="relative w-full max-w-lg min-h-[320px] bg-cream shadow-2xl rounded-sm flex flex-col items-center justify-center p-8 border border-white/50">
+            <div className="relative w-full max-w-md md:max-w-lg min-h-[320px] bg-cream shadow-2xl rounded-sm flex flex-col items-center justify-center p-6 md:p-8 border border-white/50">
               {/* Envelope Flap (visual only for now) */}
               <div className="absolute top-0 left-0 w-full h-1/2 bg-cream/90 border-b border-black/5 rounded-t-sm clip-triangle transform origin-top" />
               
               <div className="z-10 w-full flex flex-col items-center mt-12">
-                <h1 className="font-serif text-3xl md:text-4xl text-wine mb-6 text-center">
+                <h1 className="font-serif text-2xl md:text-4xl text-wine mb-6 text-center px-2">
                   Who is my favorite person?
                 </h1>
                 <form onSubmit={handleSubmit} className="w-full relative px-4">
@@ -50,7 +50,7 @@ export default function Act1Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter her beautiful name..."
-                    className="w-full bg-transparent border-b-2 border-wine/30 focus:border-wine text-center text-xl p-3 font-serif text-wine placeholder-wine/40 focus:outline-none transition-colors"
+                    className="w-full bg-transparent border-b-2 border-wine/30 focus:border-wine text-center text-lg md:text-xl p-3 font-serif text-wine placeholder-wine/40 focus:outline-none transition-colors"
                   />
                   {isError && (
                     <p className="absolute -bottom-8 w-full text-center text-rose-500 font-serif text-sm font-bold">

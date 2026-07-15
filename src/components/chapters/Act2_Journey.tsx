@@ -17,16 +17,21 @@ export default function Act2Journey() {
       if (step < timelineEvents.length) {
         const timer = setTimeout(() => {
           setStep(step + 1);
-        }, 2000); // Show next event every 2 seconds
-        return () => clearTimeout(timer);
-      } else {
-        const timer = setTimeout(() => {
-          setCurrentAct("memories");
-        }, 3000); // Wait 3 seconds after last event before moving to Act 3
+        }, 3000); // 3 seconds per step
         return () => clearTimeout(timer);
       }
     }
-  }, [isPlaying, step, setCurrentAct]);
+  }, [isPlaying, step]);
+
+  // Smoothly scroll the newly revealed event card into view
+  useEffect(() => {
+    if (isPlaying && step > 0) {
+      const element = document.getElementById(`event-${step - 1}`);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  }, [step, isPlaying]);
 
   const startJourney = () => {
     if (!isPlaying) {
@@ -41,7 +46,7 @@ export default function Act2Journey() {
       onClick={startJourney}
     >
       <div className="absolute inset-0 w-full h-full overflow-y-auto overflow-x-hidden flex flex-col items-center justify-start py-20">
-        <div className="w-full text-center mb-16 mt-8">
+        <div className="w-full text-center mb-16 mt-8 shrink-0">
           <h2 className="font-serif text-4xl text-gold text-glow">Our Journey</h2>
           {!isPlaying && (
             <motion.p 
@@ -73,6 +78,7 @@ export default function Act2Journey() {
               return (
                 <motion.div 
                   key={event.id}
+                  id={`event-${index}`}
                   className={`relative w-full flex flex-col md:flex-row items-center ${isEven ? 'md:flex-row-reverse' : ''}`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -102,8 +108,27 @@ export default function Act2Journey() {
           </div>
         </div>
 
-        {/* Button removed in favor of screen click */}
-        <div className="h-32 w-full" />
+        {/* Continue Button */}
+        {step >= timelineEvents.length && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            className="mt-12 flex justify-center pb-24 z-20 shrink-0"
+          >
+            <button
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent re-triggering startJourney
+                setCurrentAct("memories");
+              }}
+              className="px-8 py-3 bg-rose-700 hover:bg-rose-600 rounded-full font-serif text-lg text-cream shadow-lg hover:shadow-rose-900/50 transition-all flex items-center gap-2 cursor-pointer z-30"
+            >
+              Continue to Memories ❤️
+            </button>
+          </motion.div>
+        )}
+
+        {step < timelineEvents.length && <div className="h-32 w-full shrink-0" />}
       </div>
     </ActWrapper>
   );

@@ -25,6 +25,9 @@ export default function CustomCursor() {
   useEffect(() => {
     if (isTouchDevice) return;
 
+    // Hide default cursor when CustomCursor is active
+    document.body.classList.add("cursor-none");
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -47,6 +50,7 @@ export default function CustomCursor() {
     window.addEventListener("mouseover", handleMouseOver);
 
     return () => {
+      document.body.classList.remove("cursor-none");
       window.removeEventListener("mousemove", updateMousePosition);
       window.removeEventListener("mouseover", handleMouseOver);
     };

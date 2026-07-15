@@ -24,11 +24,11 @@ export default function Act4TheQuestion() {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       
-      const padding = 20;
-      const btnWidth = 140;
-      const btnHeight = 60;
-      const maxX = Math.max(50, (rect.width - btnWidth) / 2 - padding);
-      const maxY = Math.max(50, (rect.height - btnHeight) / 2 - padding);
+      const padding = 15;
+      const btnWidth = 130;
+      const btnHeight = 50;
+      const maxX = Math.max(30, (rect.width - btnWidth) / 2 - padding);
+      const maxY = Math.max(30, (rect.height - btnHeight) / 2 - padding);
       
       const randomX = (Math.random() - 0.5) * maxX * 2;
       const randomY = (Math.random() - 0.5) * maxY * 2;
@@ -85,13 +85,13 @@ export default function Act4TheQuestion() {
 
   return (
     <ActWrapper className="z-10 bg-black text-cream" >
-      <div ref={containerRef} className="relative w-full min-h-[80vh] flex flex-col items-center justify-center overflow-hidden py-12 px-4">
+      <div className="relative w-full min-h-[80vh] flex flex-col items-center justify-center overflow-hidden py-12 px-4">
         
         <AnimatePresence>
           {!hasClickedYes && (
             <motion.div
               exit={{ opacity: 0, scale: 0.5 }}
-              className="text-center z-20 w-full max-w-2xl"
+              className="text-center z-20 w-full max-w-2xl flex flex-col items-center"
             >
               <h2 className="font-serif text-2xl md:text-4xl mb-10 max-w-2xl px-4 leading-relaxed text-glow break-words hyphens-auto mx-auto">
                 I know I&apos;m the biggest idiot for forgetting your birthday...
@@ -99,35 +99,40 @@ export default function Act4TheQuestion() {
                 <span className="text-gold">Will you forgive your idiot husband and let me spend the rest of my life making it up to you?</span>
               </h2>
 
-              <div className="flex flex-wrap gap-8 items-center justify-center mt-12 relative w-full min-h-[150px]">
+              <div className="flex flex-col items-center justify-center mt-6 w-full gap-8">
                 <motion.button
                   onClick={handleYesClick}
                   animate={{ scale: yesScale }}
-                  className="px-8 py-4 bg-rose-700 hover:bg-rose-600 rounded-full font-serif text-xl font-bold shadow-lg shadow-rose-900/50 text-white z-30 shrink-0"
+                  className="px-10 py-5 bg-rose-700 hover:bg-rose-600 rounded-full font-serif text-xl font-bold shadow-lg shadow-rose-900/50 text-white z-30 shrink-0"
                   whileHover={{ scale: yesScale * 1.05 }}
                   whileTap={{ scale: yesScale * 0.95 }}
                 >
                   Yes! ❤️
                 </motion.button>
 
-                <motion.button
-                  onMouseEnter={handleNoHover}
-                  onClick={handleNoHover} // For mobile taps
-                  animate={isMoved ? { 
-                    x: noPosition.x, 
-                    y: noPosition.y,
-                    scale: noScale,
-                  } : {
-                    x: 0, 
-                    y: 0,
-                    scale: noScale,
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className={`px-8 py-4 bg-zinc-800 rounded-full font-serif text-xl text-zinc-300 z-30 shrink-0 ${isMoved ? 'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' : 'relative'}`}
-                  style={{ minWidth: "120px" }}
+                <div 
+                  ref={containerRef}
+                  className="relative w-full max-w-xs md:max-w-sm h-40 border border-dashed border-white/10 hover:border-white/20 rounded-2xl flex items-center justify-center overflow-hidden bg-white/[0.01] transition-colors"
                 >
-                  {noText}
-                </motion.button>
+                  <motion.button
+                    onMouseEnter={handleNoHover}
+                    onClick={handleNoHover} // For mobile taps
+                    animate={isMoved ? { 
+                      x: noPosition.x, 
+                      y: noPosition.y,
+                      scale: noScale,
+                    } : {
+                      x: 0, 
+                      y: 0,
+                      scale: noScale,
+                    }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className={`px-6 py-3 bg-zinc-800 hover:bg-zinc-700 rounded-full font-serif text-lg text-zinc-300 z-30 shrink-0 cursor-pointer ${isMoved ? 'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2' : 'relative'}`}
+                    style={{ minWidth: "120px" }}
+                  >
+                    {noText}
+                  </motion.button>
+                </div>
               </div>
             </motion.div>
           )}
